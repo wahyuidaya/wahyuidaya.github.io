@@ -471,6 +471,44 @@ h2.t{
   gap:14px;
 }
 
+.portfolio-card.is-hidden{
+  display:none !important;
+}
+
+.load-more-wrap{
+  text-align:center;
+  margin-top:24px;
+}
+
+.btn-more{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:10px 22px;
+  border-radius:8px;
+  font-size:13px;
+  font-weight:700;
+  cursor:pointer;
+  border:1px solid var(--bd);
+  background:var(--card);
+  color:var(--tx);
+  transition:all .2s ease;
+}
+
+.btn-more:hover{
+  background:var(--navy);
+  color:#fff;
+  border-color:var(--navy);
+}
+
+.btn-more svg{
+  transition:transform .25s ease;
+}
+
+.btn-more.is-expanded svg{
+  transform:rotate(180deg);
+}
+
 .portfolio-card{
   background:var(--card);
   border:1px solid var(--bd);
@@ -2707,6 +2745,52 @@ filterButtons.forEach(
 
   }
 );
+
+
+/* ================================================= */
+/* LOAD MORE / SHOW ALL TOGGLE (MAX 3 CARDS INITIALLY) */
+/* ================================================= */
+
+document.querySelectorAll(".portfolio-panel").forEach(panel => {
+  const cards = panel.querySelectorAll(".portfolio-grid > .portfolio-card");
+  if (cards.length > 3) {
+    cards.forEach((card, idx) => {
+      if (idx >= 3) {
+        card.classList.add("is-hidden");
+      }
+    });
+
+    const wrap = document.createElement("div");
+    wrap.className = "load-more-wrap";
+    wrap.innerHTML = `
+      <button class="btn-more" type="button">
+        <span class="btn-more-txt">Lihat Semua (${cards.length})</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+    `;
+
+    panel.appendChild(wrap);
+
+    const btn = wrap.querySelector(".btn-more");
+    const txt = wrap.querySelector(".btn-more-txt");
+    let expanded = false;
+
+    btn.addEventListener("click", () => {
+      expanded = !expanded;
+      btn.classList.toggle("is-expanded", expanded);
+
+      cards.forEach((card, idx) => {
+        if (idx >= 3) {
+          card.classList.toggle("is-hidden", !expanded);
+        }
+      });
+
+      txt.textContent = expanded ? "Tampilkan Lebih Sedikit" : `Lihat Semua (${cards.length})`;
+    });
+  }
+});
 
 
 /* ================================================= */

@@ -1482,33 +1482,33 @@ footer{
         <div class="pc-top">
 
           <span class="pc-icon">
-            ⌁
+            🏛️
           </span>
 
           <span class="pill">
-            2025
+            2025 – 2026
           </span>
 
         </div>
 
         <h3>
-          Dashboard Analitik Penjualan
+          Pengajuan Magang Mandiri
         </h3>
 
         <p class="pc-org">
-          Proyek Mandiri
+          Program Studi Universitas Gunadarma
         </p>
 
         <p class="pc-desc">
-          Dashboard untuk merangkum omzet, produk terlaris, dan tren penjualan.
+          Sistem informasi multi-role (Mahasiswa, Staf Prodi, Dosen, Mitra) untuk digitalisasi alur pendaftaran, verifikasi berkas, silabus, dan penilaian magang.
         </p>
 
         <button
           class="btn detail-btn"
           data-type="project"
-          data-title="Dashboard Analitik Penjualan"
-          data-org="Proyek Mandiri"
-          data-year="2025">
+          data-title="Pengajuan Magang Mandiri"
+          data-org="Program Studi Universitas Gunadarma"
+          data-year="2025 – 2026">
 
           Lihat detail
 
@@ -2914,23 +2914,26 @@ const detailData = {
       ]
     },
 
-    "Dashboard Analitik Penjualan": {
+    "Pengajuan Magang Mandiri": {
       desc:
-        "Dashboard interaktif untuk merangkum data penjualan dan membantu melihat performa bisnis.",
+        "Sistem informasi terintegrasi untuk mendigitalkan seluruh alur pengajuan dan pengelolaan program magang mandiri mahasiswa di tingkat program studi. Memiliki 4 hak akses peran berbeda dengan otomasi verifikasi berkas, monitoring logbook, dan penilaian industri.",
       points: [
-        "Ringkasan omzet",
-        "Produk terlaris",
-        "Riwayat pesanan"
+        "Autentikasi multi-role (Mahasiswa, Staf Prodi, Dosen Pembimbing, Mitra Perusahaan) dengan otorisasi hak akses ketat",
+        "Pendaftaran dan pengajuan magang mandiri online dengan unggah KRS dan parsing otomatis via PDFParser",
+        "Verifikasi berkas persyaratan dan penunjukan (ploting) Dosen Pembimbing oleh Staf Program Studi",
+        "Manajemen silabus industri dan pengisian logbook laporan kegiatan magang mingguan/berkala",
+        "Penilaian kinerja mahasiswa oleh mitra perusahaan serta pembuatan surat rekomendasi dinamis via DomPDF"
       ],
       tools: [
-        "React",
-        "Chart.js",
-        "Tailwind"
+        "Laravel 12",
+        "PHP 8.2",
+        "MySQL",
+        "Blade",
+        "Vite / Tailwind",
+        "DomPDF"
       ],
-      images: [
-        "images/dashboard-1.jpg",
-        "images/dashboard-2.jpg"
-      ]
+      github: "https://github.com/wahyuidaya/pengajuan_magang_mandiri",
+      images: []
     },
 
     "Absensi QR Kampus": {

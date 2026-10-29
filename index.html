@@ -565,6 +565,53 @@ h2.t{
   text-align:center;
 }
 
+/* ================= CARD THUMBNAIL ================= */
+
+.pc-thumb{
+  margin:-18px -18px 16px;
+  height:160px;
+  border-radius:10px 10px 0 0;
+  overflow:hidden;
+  position:relative;
+  background:linear-gradient(135deg,var(--navy),var(--ac));
+  flex-shrink:0;
+}
+
+.pc-thumb img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:top center;
+  display:block;
+  transition:transform .45s ease;
+}
+
+.portfolio-card:hover .pc-thumb img{
+  transform:scale(1.05);
+}
+
+.pc-thumb-grad{
+  width:100%;
+  height:100%;
+  position:absolute;
+  inset:0;
+}
+
+.pc-thumb-label{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  font-weight:800;
+  color:rgba(255,255,255,.18);
+  letter-spacing:3px;
+  text-transform:uppercase;
+  pointer-events:none;
+  user-select:none;
+}
+
 /* ================= SKILLS ================= */
 
 .skill-grid{
@@ -4493,6 +4540,120 @@ window.addEventListener(
 initPhysics();
 
 animationLoop();
+
+
+/* ================= CARD THUMBNAILS ================= */
+
+(function(){
+
+  // Map: data-title → thumbnail src (URL or gradient string)
+  const thumbMap = {
+
+    // ── EXPERIENCE ──────────────────────────────────────
+    "Sistem Pemesanan Menu QR Code (CoffeeBox_Jkt)":
+      "images/coffeebox-1.jpg",
+    "Sistem Pengajuan Magang Mandiri":
+      "linear-gradient(135deg,#1a365d 0%,#2d6a4f 100%)",
+
+    // ── PROJECTS ─────────────────────────────────────────
+    // CoffeeBox (same project, project panel)
+    // covered by same key above
+
+    "Sistem Informasi Inventaris Coffee Shop (JWP Coffee)":
+      "https://image.thum.io/get/width/800/crop/500/https://inventoryjwpcoffee.vercel.app",
+
+    "Magang ID - Portal Rekrutmen Magang":
+      "https://image.thum.io/get/width/800/crop/500/https://magangid.vercel.app",
+
+    "Wedding Organizer Jewepe":
+      "https://image.thum.io/get/width/800/crop/500/https://weddingjewepe.vercel.app",
+
+    "Sistem Pemesanan Tiket Kereta Api":
+      "https://image.thum.io/get/width/800/crop/500/https://keretaapi-coral.vercel.app",
+
+    "Sipaling Coffee - Web Profile & Menu Catalog":
+      "https://image.thum.io/get/width/800/crop/500/https://sipalingcoffee.vercel.app",
+
+    // ── CERTIFICATIONS ───────────────────────────────────
+    "Junior Web Programmer":
+      "images/sertifikat-bnsp.png",
+
+    "Aptitude Test":
+      "linear-gradient(135deg,#0f2027 0%,#203a43 50%,#2c5364 100%)",
+
+    "Basic Web Application Development":
+      "linear-gradient(135deg,#16213e 0%,#0f3460 60%,#533483 100%)",
+
+    "Basic Web Application Design":
+      "linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#e94560 100%)",
+
+    "GO-LANG FOR INTERMEDIATE":
+      "linear-gradient(135deg,#00add8 0%,#007d9c 100%)",
+
+    "GO-LANG FOR BEGINNER":
+      "linear-gradient(135deg,#5dc9e2 0%,#00add8 100%)",
+
+    "WIDE AREA NETWORK USING CISCO ROUTER FOR INTERMEDIATE":
+      "linear-gradient(135deg,#1b4f72 0%,#1a5276 50%,#2e86c1 100%)",
+
+    "LOCAL AREA NETWORK USING CISCO ROUTER":
+      "linear-gradient(135deg,#154360 0%,#1f618d 100%)",
+
+    "Introduction to wireless LAN installation":
+      "linear-gradient(135deg,#0e6655 0%,#148f77 100%)",
+
+    "Building Website using HTML 5":
+      "linear-gradient(135deg,#e44d26 0%,#f16529 100%)",
+
+    "FUNDAMENTAL WEB PROGRAMMING":
+      "linear-gradient(135deg,#2c3e50 0%,#3498db 100%)",
+
+    "FUNDAMENTAL NETWORKING":
+      "linear-gradient(135deg,#1c2833 0%,#2980b9 100%)",
+
+  };
+
+  const fallback = "linear-gradient(135deg,var(--navy) 0%,var(--ac) 100%)";
+
+  document.querySelectorAll(".portfolio-card").forEach(function(card){
+    var btn  = card.querySelector(".detail-btn");
+    if(!btn) return;
+
+    var title = btn.getAttribute("data-title") || "";
+    var src   = thumbMap[title] || fallback;
+    var isGrad = src.indexOf("gradient") !== -1;
+
+    var wrap = document.createElement("div");
+    wrap.className = "pc-thumb";
+
+    if(isGrad){
+      var inner = document.createElement("div");
+      inner.className = "pc-thumb-grad";
+      inner.style.background = src;
+      var lbl = document.createElement("div");
+      lbl.className = "pc-thumb-label";
+      lbl.textContent = title.split(" ").slice(0,2).join(" ");
+      wrap.appendChild(inner);
+      wrap.appendChild(lbl);
+    } else {
+      var img = document.createElement("img");
+      img.src = src;
+      img.alt = title + " preview";
+      img.loading = "lazy";
+      img.onerror = function(){
+        this.parentElement.innerHTML =
+          "<div class='pc-thumb-grad' style='background:" + fallback + "'></div>" +
+          "<div class='pc-thumb-label'>" + title.split(" ").slice(0,2).join(" ") + "</div>";
+      };
+      wrap.appendChild(img);
+    }
+
+    card.insertBefore(wrap, card.firstChild);
+  });
+
+})();
+
+
 
 </script>
 

@@ -273,6 +273,8 @@ h2.t{
   touch-action:none;
   z-index:2;
   will-change:transform;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
 }
 
 .clip{
@@ -4236,620 +4238,238 @@ document
 /* NAMETAG PHYSICS */
 /* ================================================= */
 
-const lan =
-  document.getElementById(
-    "lan"
-  );
-
-const card =
-  document.getElementById(
-    "card"
-  );
-
-const s1 =
-  document.getElementById(
-    "s1"
-  );
-
-const s2 =
-  document.getElementById(
-    "s2"
-  );
+const lan = document.getElementById("lan");
+const card = document.getElementById("card");
+const s1 = document.getElementById("s1");
+const s2 = document.getElementById("s2");
 
 const N = 7;
-
 const L = 17;
-
 const LL = 24;
 
-const reducedMotion =
-  window.matchMedia(
-    "(prefers-reduced-motion: reduce)"
-  ).matches;
-
+const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 let points = [];
-
 let ax = 0;
-
 let dragging = false;
-
+let lanRect = null;
 let tx = 0;
-
 let ty = 0;
-
 let ox = 0;
-
 let oy = 0;
-
+let vxRelease = 0;
+let vyRelease = 0;
 let angle = 0;
-
 let visible = true;
+let sleeping = false;
+let lastFrameTime = performance.now();
 
-
-const maxRadius =
-  (N - 1) * L +
-  LL +
-  15;
-
+const maxRadius = (N - 1) * L + LL + 24;
 
 function initPhysics(){
-
-  ax =
-    lan.clientWidth / 2;
-
+  ax = lan.clientWidth / 2;
   points = [];
 
-
-  for(
-    let i = 0;
-    i <= N;
-    i++
-  ){
-
-    const x =
-
-      ax +
-
-      (
-        reducedMotion
-          ? 0
-          : Math.sin(
-              i * .4
-            ) * 6
-      );
-
-
+  for(let i = 0; i <= N; i++){
+    const x = ax + (reducedMotion ? 0 : Math.sin(i * .45) * 8);
     points.push({
-
-      x:x,
-
-      y:i * L,
-
-      px:x,
-
-      py:i * L
-
+      x: x,
+      y: i * L,
+      px: x,
+      py: i * L
     });
-
   }
-
+  sleeping = false;
 }
 
+function physicsStep(dtScale){
+  const damp = dragging ? .94 : .982;
+  const gravity = 1.15 * dtScale;
 
-function physicsStep(){
+  let totalMotion = 0;
 
-  const damp =
-    dragging
-      ? .92
-      : .965;
+  for(let i = 1; i <= N; i++){
+    const p = points[i];
 
-  const gravity =
-    .45;
-
-
-  for(
-    let i = 1;
-    i <= N;
-    i++
-  ){
-
-    const p =
-      points[i];
-
-
-    if(
-      dragging &&
-      i === N
-    ){
-
+    if(dragging && i === N){
       continue;
-
     }
 
+    const vx = (p.x - p.px) * damp;
+    const vy = (p.y - p.py) * damp;
 
-    let vx =
-      (
-        p.x -
-        p.px
-      ) * damp;
+    p.px = p.x;
+    p.py = p.y;
 
+    p.x += vx;
+    p.y += vy + gravity;
 
-    let vy =
-      (
-        p.y -
-        p.py
-      ) * damp;
-
-
-    p.px =
-      p.x;
-
-    p.py =
-      p.y;
-
-
-    p.x +=
-      vx;
-
-    p.y +=
-      vy +
-      gravity;
-
+    totalMotion += Math.abs(vx) + Math.abs(vy);
   }
-
 
   if(dragging){
+    let targetX = tx - ox;
+    let targetY = ty - oy;
 
-    let targetX =
-      tx -
-      ox;
+    const dx = targetX - ax;
+    const dy = targetY;
+    const distance = Math.hypot(dx, dy);
 
-    let targetY =
-      ty -
-      oy;
-
-
-    const dx =
-      targetX -
-      ax;
-
-    const dy =
-      targetY;
-
-
-    const distance =
-      Math.hypot(
-        dx,
-        dy
-      );
-
-
-    if(
-      distance >
-      maxRadius
-    ){
-
-      targetX =
-        ax +
-        (
-          dx /
-          distance
-        ) *
-        maxRadius;
-
-
-      targetY =
-        (
-          dy /
-          distance
-        ) *
-        maxRadius;
-
+    if(distance > maxRadius){
+      targetX = ax + (dx / distance) * maxRadius;
+      targetY = (dy / distance) * maxRadius;
     }
 
+    const end = points[N];
+    vxRelease = (targetX - end.x) * 0.55;
+    vyRelease = (targetY - end.y) * 0.55;
 
-    const end =
-      points[N];
-
-
-    end.px =
-      end.x;
-
-    end.py =
-      end.y;
-
-    end.x =
-      targetX;
-
-    end.y =
-      targetY;
-
+    end.px = end.x;
+    end.py = end.y;
+    end.x += (targetX - end.x) * 0.85;
+    end.y += (targetY - end.y) * 0.85;
+    totalMotion = 10;
   }
 
+  const iterations = 12;
+  for(let k = 0; k < iterations; k++){
+    points[0].x = ax;
+    points[0].y = 0;
 
-  for(
-    let k = 0;
-    k < 18;
-    k++
-  ){
+    for(let i = 0; i < N; i++){
+      const a = points[i];
+      const b = points[i + 1];
+      const length = i === N - 1 ? LL : L;
 
-    points[0].x =
-      ax;
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const distance = Math.hypot(dx, dy) || .001;
+      const difference = (distance - length) / distance;
 
-    points[0].y =
-      0;
-
-
-    for(
-      let i = 0;
-      i < N;
-      i++
-    ){
-
-      const a =
-        points[i];
-
-      const b =
-        points[i + 1];
-
-
-      const length =
-        i === N - 1
-          ? LL
-          : L;
-
-
-      const dx =
-        b.x -
-        a.x;
-
-      const dy =
-        b.y -
-        a.y;
-
-
-      const distance =
-        Math.hypot(
-          dx,
-          dy
-        ) || .001;
-
-
-      const difference =
-        (
-          distance -
-          length
-        ) /
-        distance;
-
-
-      if(
-        dragging &&
-        i + 1 === N
-      ){
-
+      if(dragging && i + 1 === N){
         if(i > 0){
-
-          a.x +=
-            dx *
-            difference;
-
-          a.y +=
-            dy *
-            difference;
-
+          a.x += dx * difference;
+          a.y += dy * difference;
         }
-
       }else{
+        const wa = i === 0 ? 0 : .5;
+        const wb = i === 0 ? 1 : .5;
 
-        const wa =
-          i === 0
-            ? 0
-            : .5;
-
-        const wb =
-          i === 0
-            ? 1
-            : .5;
-
-
-        a.x +=
-          dx *
-          difference *
-          wa;
-
-        a.y +=
-          dy *
-          difference *
-          wa;
-
-
-        b.x -=
-          dx *
-          difference *
-          wb;
-
-        b.y -=
-          dy *
-          difference *
-          wb;
-
+        a.x += dx * difference * wa;
+        a.y += dy * difference * wa;
+        b.x -= dx * difference * wb;
+        b.y -= dy * difference * wb;
       }
-
     }
-
   }
 
+  if(!dragging && totalMotion < 0.015 && Math.abs(points[N].x - ax) < 0.2){
+    sleeping = true;
+  }
 }
-
 
 function drawPhysics(){
+  let path = `M${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
 
-  let path =
-
-    `M${points[0].x.toFixed(1)} ` +
-    `${points[0].y.toFixed(1)}`;
-
-
-  for(
-    let i = 1;
-    i < N;
-    i++
-  ){
-
-    const mx =
-      (
-        points[i - 1].x +
-        points[i].x
-      ) / 2;
-
-
-    const my =
-      (
-        points[i - 1].y +
-        points[i].y
-      ) / 2;
-
-
-    path +=
-
-      ` Q${points[i - 1].x.toFixed(1)} ` +
-      `${points[i - 1].y.toFixed(1)} ` +
-      `${mx.toFixed(1)} ` +
-      `${my.toFixed(1)}`;
-
+  for(let i = 1; i < N; i++){
+    const mx = (points[i - 1].x + points[i].x) * 0.5;
+    const my = (points[i - 1].y + points[i].y) * 0.5;
+    path += ` Q${points[i - 1].x.toFixed(1)} ${points[i - 1].y.toFixed(1)} ${mx.toFixed(1)} ${my.toFixed(1)}`;
   }
 
+  path += ` L${points[N].x.toFixed(1)} ${points[N].y.toFixed(1)}`;
 
-  path +=
+  s1.setAttribute("d", path);
+  s2.setAttribute("d", path);
 
-    ` L${points[N].x.toFixed(1)} ` +
-    `${points[N].y.toFixed(1)}`;
+  const a = points[N - 1];
+  const b = points[N];
 
-
-  s1.setAttribute(
-    "d",
-    path
-  );
-
-  s2.setAttribute(
-    "d",
-    path
-  );
-
-
-  const a =
-    points[N - 1];
-
-  const b =
-    points[N];
-
-
-  const targetAngle =
-    Math.atan2(
-      b.x - a.x,
-      b.y - a.y
-    );
-
-
-  angle +=
-
-    (
-      targetAngle -
-      angle
-    ) *
-
-    (
-      dragging
-        ? .35
-        : .18
-    );
-
+  const targetAngle = Math.atan2(b.x - a.x, b.y - a.y) * 0.85;
+  angle += (targetAngle - angle) * (dragging ? .45 : .28);
 
   card.style.transform =
-
-    `translate3d(` +
-    `${b.x}px,${b.y}px,0) ` +
-    `translate(-50%,0) ` +
-    `rotate(${-angle}rad)`;
-
+    `translate3d(${(b.x - 88).toFixed(2)}px,${b.y.toFixed(2)}px,0) rotate(${(-angle).toFixed(4)}rad)`;
 }
 
+function animationLoop(now){
+  const dt = Math.min((now - lastFrameTime) / 16.667, 2.2);
+  lastFrameTime = now;
 
-function animationLoop(){
-
-  if(visible){
-
-    physicsStep();
-
+  if(visible && (!sleeping || dragging)){
+    physicsStep(dt);
     drawPhysics();
-
   }
 
-  requestAnimationFrame(
-    animationLoop
-  );
-
+  requestAnimationFrame(animationLoop);
 }
 
-
-function updatePointer(
-  event
-){
-
-  const rect =
-    lan.getBoundingClientRect();
-
-
-  tx =
-    event.clientX -
-    rect.left;
-
-
-  ty =
-    event.clientY -
-    rect.top;
-
+function updatePointer(event){
+  if(!lanRect){
+    lanRect = lan.getBoundingClientRect();
+  }
+  tx = event.clientX - lanRect.left;
+  ty = event.clientY - lanRect.top;
 }
 
-
-card.addEventListener(
-  "pointerdown",
-  event => {
-
-    dragging = true;
-
-
-    card.setPointerCapture(
-      event.pointerId
-    );
-
-
-    updatePointer(
-      event
-    );
-
-
-    ox =
-      tx -
-      points[N].x;
-
-
-    oy =
-      ty -
-      points[N].y;
-
-
-    card.style.cursor =
-      "grabbing";
-
-  }
-);
-
-
-card.addEventListener(
-  "pointermove",
-  event => {
-
-    if(dragging){
-
-      updatePointer(
-        event
-      );
-
-    }
-
-  }
-);
-
-
-function releaseDrag(
-  event
-){
-
-  if(!dragging){
-
-    return;
-
-  }
-
-
-  dragging = false;
-
+card.addEventListener("pointerdown", event => {
+  event.preventDefault();
+  dragging = true;
+  sleeping = false;
+  lanRect = lan.getBoundingClientRect();
 
   try{
-
-    card.releasePointerCapture(
-      event.pointerId
-    );
-
+    card.setPointerCapture(event.pointerId);
   }catch(e){}
 
+  updatePointer(event);
 
-  const p =
-    points[N];
+  ox = tx - points[N].x;
+  oy = ty - points[N].y;
+  vxRelease = 0;
+  vyRelease = 0;
 
+  card.style.cursor = "grabbing";
+});
 
-  p.px =
-    p.x -
-    (
-      p.x -
-      p.px
-    ) *
-    .4;
+window.addEventListener("pointermove", event => {
+  if(dragging){
+    updatePointer(event);
+  }
+}, { passive: true });
 
+function releaseDrag(event){
+  if(!dragging) return;
+  dragging = false;
 
-  p.py =
-    p.y -
-    (
-      p.y -
-      p.py
-    ) *
-    .4;
+  try{
+    card.releasePointerCapture(event.pointerId);
+  }catch(e){}
 
+  const p = points[N];
+  p.px = p.x - Math.max(-22, Math.min(22, vxRelease));
+  p.py = p.y - Math.max(-22, Math.min(22, vyRelease));
 
-  card.style.cursor =
-    "grab";
-
+  card.style.cursor = "grab";
 }
 
+window.addEventListener("pointerup", releaseDrag);
+window.addEventListener("pointercancel", releaseDrag);
 
-card.addEventListener(
-  "pointerup",
-  releaseDrag
-);
+new IntersectionObserver(entries => {
+  visible = entries[0].isIntersecting;
+  if(visible) lastFrameTime = performance.now();
+}).observe(lan);
 
-card.addEventListener(
-  "pointercancel",
-  releaseDrag
-);
-
-
-new IntersectionObserver(
-  entries => {
-
-    visible =
-      entries[0].isIntersecting;
-
-  }
-).observe(lan);
-
-
-window.addEventListener(
-  "resize",
-  () => {
-
-    ax =
-      lan.clientWidth / 2;
-
-  }
-);
-
+window.addEventListener("resize", () => {
+  ax = lan.clientWidth / 2;
+  lanRect = null;
+  sleeping = false;
+});
 
 initPhysics();
-
-animationLoop();
+drawPhysics();
+requestAnimationFrame(animationLoop);
 
 
 /* ================= HAMBURGER MENU ================= */

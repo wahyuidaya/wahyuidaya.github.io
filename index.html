@@ -11,38 +11,41 @@
 <style>
 
 :root{
-  --bg:#eef1f6;
-  --tx:#111826;
-  --mu:#5c6577;
-  --card:#fff;
-  --bd:#d7deea;
+  --bg:#f4f6fa;
+  --tx:#0f172a;
+  --mu:#475569;
+  --card:#ffffff;
+  --bd:#d8e0ec;
   --navy:#16233f;
+  --sub:#1e3a6e;
   --ac:#b8862f;
   --acs:rgba(184,134,47,.14);
 }
 
 @media(prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
-    --bg:#0a0f1c;
-    --tx:#e9edf5;
-    --mu:#8b96ab;
-    --card:#111a2c;
-    --bd:#233047;
-    --navy:#1b2c4c;
-    --ac:#d6ab5c;
-    --acs:rgba(214,171,92,.16);
+    --bg:#0b1120;
+    --tx:#f1f5f9;
+    --mu:#94a3b8;
+    --card:#131c31;
+    --bd:#24324b;
+    --navy:#1e293b;
+    --sub:#93c5fd;
+    --ac:#e2b659;
+    --acs:rgba(226,182,89,.16);
   }
 }
 
 :root[data-theme="dark"]{
-  --bg:#0a0f1c;
-  --tx:#e9edf5;
-  --mu:#8b96ab;
-  --card:#111a2c;
-  --bd:#233047;
-  --navy:#1b2c4c;
-  --ac:#d6ab5c;
-  --acs:rgba(214,171,92,.16);
+  --bg:#0b1120;
+  --tx:#f1f5f9;
+  --mu:#94a3b8;
+  --card:#131c31;
+  --bd:#24324b;
+  --navy:#1e293b;
+  --sub:#93c5fd;
+  --ac:#e2b659;
+  --acs:rgba(226,182,89,.16);
 }
 
 *{
@@ -205,12 +208,28 @@ h2.t{
   background:var(--card);
   color:var(--tx);
   cursor:pointer;
+  transition:all .2s ease;
+}
+
+.btn:hover{
+  border-color:var(--ac);
 }
 
 .btn.p{
   background:var(--navy);
   color:#fff;
   border-color:var(--navy);
+}
+
+:root[data-theme="dark"] .btn.p{
+  background:var(--ac);
+  color:#0b1120;
+  border-color:var(--ac);
+}
+
+:root[data-theme="dark"] .btn.p:hover{
+  background:#eab308;
+  border-color:#eab308;
 }
 
 .row{
@@ -445,6 +464,12 @@ h2.t{
   border-color:var(--navy);
 }
 
+:root[data-theme="dark"] .filter-btn.active{
+  background:var(--ac);
+  color:#0b1120;
+  border-color:var(--ac);
+}
+
 .portfolio-panel{
   display:none;
 }
@@ -501,6 +526,12 @@ h2.t{
   border-color:var(--navy);
 }
 
+:root[data-theme="dark"] .btn-more:hover{
+  background:var(--ac);
+  color:#0b1120;
+  border-color:var(--ac);
+}
+
 .btn-more svg{
   transition:transform .25s ease;
 }
@@ -551,6 +582,11 @@ h2.t{
 .pc-org{
   font-size:13px;
   font-weight:600;
+  color:var(--mu);
+}
+
+.modal-chips span{
+  color:var(--tx);
 }
 
 .pc-desc{
@@ -1659,7 +1695,7 @@ footer{
         <div class="pc-top">
           <span class="pill">2026</span>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
           Full-Stack Developer • Proyek Tugas Akhir / Skripsi
         </div>
         <h3>Sistem Pemesanan Menu QR Code (CoffeeBox_Jkt)</h3>
@@ -1681,7 +1717,7 @@ footer{
         <div class="pc-top">
           <span class="pill">2025 – 2026</span>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
           Programmer • Tim Pengembang (SDLC)
         </div>
         <h3>Sistem Pengajuan Magang Mandiri</h3>
@@ -1719,7 +1755,7 @@ footer{
         <div class="pc-top">
           <span class="pill">2026</span>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
           Proyek Tugas Akhir / Skripsi
         </div>
         <h3>Sistem Pemesanan Menu QR Code (CoffeeBox_Jkt)</h3>
@@ -1742,7 +1778,7 @@ footer{
         <div class="pc-top">
           <span class="pill">2026</span>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
           Personal Project • Laravel 12
         </div>
         <h3>Sistem Informasi Inventaris Coffee Shop (JWP Coffee)</h3>
@@ -1765,7 +1801,7 @@ footer{
         <div class="pc-top">
           <span class="pill">2025 – 2026</span>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
           Sistem Informasi & Workflow
         </div>
         <h3>Sistem Pengajuan Magang Mandiri</h3>
@@ -1788,7 +1824,7 @@ footer{
         <div class="pc-top">
           <span class="pill">2025</span>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
           Personal Project • Multi-Role Portal
         </div>
         <h3>Magang ID - Portal Rekrutmen Magang</h3>
@@ -1811,7 +1847,7 @@ footer{
         <div class="pc-top">
           <span class="pill">2025</span>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
           Personal Project • Web Application
         </div>
         <h3>Wedding Organizer Jewepe</h3>
@@ -1834,7 +1870,7 @@ footer{
         <div class="pc-top">
           <span class="pill">2024</span>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
           Personal Project • Ticketing System
         </div>
         <h3>Sistem Pemesanan Tiket Kereta Api</h3>
@@ -1857,7 +1893,7 @@ footer{
         <div class="pc-top">
           <span class="pill">2024</span>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">
           Personal Project • Front-End & AJAX
         </div>
         <h3>Sipaling Coffee - Web Profile & Menu Catalog</h3>
@@ -1911,7 +1947,7 @@ footer{
         <div class="pc-top">
           <span class="pill">Juni 2026</span>
         </div>
-        <div style="font-size:11px;font-weight:700;color:var(--navy);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">BNSP • SKKNI KOMPETEN</div>
+        <div style="font-size:11px;font-weight:700;color:var(--sub);letter-spacing:0.5px;margin-bottom:4px;text-transform:uppercase;">BNSP • SKKNI KOMPETEN</div>
         <h3>Junior Web Programmer</h3>
         <p class="pc-org">LSP Universitas Gunadarma / BNSP</p>
         <p class="pc-desc">Sertifikasi Profesi Standar Kompetensi Kerja Nasional Indonesia (SKKNI). Dinyatakan KOMPETEN dalam seluruh 8 unit kompetensi inti rekayasa perangkat lunak web oleh Asesor LSP Gunadarma / BNSP.</p>
@@ -2930,6 +2966,13 @@ function setTheme(theme){
     theme === "dark"
       ? "☀"
       : "☾";
+
+  const thDrawerBtn = document.getElementById("thDrawer");
+  if(thDrawerBtn){
+    thDrawerBtn.innerHTML = theme === "dark"
+      ? "&#9728;&#65039;&nbsp; Mode Terang"
+      : "&#127769;&nbsp; Mode Gelap";
+  }
 
   try{
 

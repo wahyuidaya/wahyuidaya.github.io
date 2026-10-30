@@ -795,20 +795,36 @@ h2.t{
   transform:translateY(-50%);
   width:38px;
   height:38px;
+  min-width:38px;
+  min-height:38px;
+  aspect-ratio:1/1;
+  padding:0;
+  margin:0;
+  flex-shrink:0;
+  box-sizing:border-box;
   border-radius:50%;
-  border:1px solid rgba(255,255,255,.25);
-  background:rgba(0,0,0,.5);
+  border:1px solid rgba(255,255,255,.28);
+  background:rgba(15,23,42,.68);
+  backdrop-filter:blur(4px);
   color:#fff;
-  font-size:22px;
-  line-height:1;
   cursor:pointer;
-  display:grid;
-  place-items:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
   transition:.2s;
+  -webkit-appearance:none;
+  appearance:none;
+}
+
+.gallery-arrow svg{
+  width:18px;
+  height:18px;
+  display:block;
+  flex-shrink:0;
 }
 
 .gallery-arrow:hover{
-  background:rgba(0,0,0,.75);
+  background:rgba(15,23,42,.9);
 }
 
 .gallery-arrow.prev{
@@ -876,19 +892,33 @@ h2.t{
   right:12px;
   width:36px;
   height:36px;
+  min-width:36px;
+  min-height:36px;
+  aspect-ratio:1/1;
+  padding:0;
+  margin:0;
+  flex-shrink:0;
+  box-sizing:border-box;
   border:1px solid rgba(255,255,255,.3);
   background:rgba(15,23,42,.82);
   backdrop-filter:blur(4px);
   color:#ffffff;
   border-radius:50%;
   cursor:pointer;
-  font-size:22px;
-  line-height:1;
   display:flex;
   align-items:center;
   justify-content:center;
   z-index:30;
   transition:all .2s ease;
+  -webkit-appearance:none;
+  appearance:none;
+}
+
+.modal-close svg{
+  width:18px;
+  height:18px;
+  display:block;
+  flex-shrink:0;
 }
 
 .modal-close:hover{
@@ -2836,8 +2866,9 @@ footer{
     <button
       class="modal-close"
       id="modalClose"
+      type="button"
       aria-label="Tutup">
-      ×
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
     </button>
 
     <!-- GALLERY -->
@@ -2858,16 +2889,18 @@ footer{
       <button
         class="gallery-arrow prev"
         id="galleryPrev"
+        type="button"
         aria-label="Gambar sebelumnya">
-        ‹
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
       </button>
 
 
       <button
         class="gallery-arrow next"
         id="galleryNext"
+        type="button"
         aria-label="Gambar berikutnya">
-        ›
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
       </button>
 
 
@@ -3844,10 +3877,10 @@ function renderGallery(){
   ){
 
     galleryPrev.style.display =
-      "grid";
+      "flex";
 
     galleryNext.style.display =
-      "grid";
+      "flex";
 
   }else{
 

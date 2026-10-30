@@ -1217,67 +1217,60 @@ footer{
   }
 
   #home{
-    padding-top:68px;
+    padding-top:64px;
     min-height:auto;
-    gap:16px;
+    gap:20px;
   }
 
   #lan{
     order:-1;
-    height:260px;
+    height:275px;
     margin:0 auto;
     width:100%;
-    max-width:300px;
+    max-width:320px;
   }
 
   .badge{
-    width:142px;
+    width:162px;
   }
 
   .clip{
-    top:-11px;
-    width:18px;
-    height:22px;
-    margin-left:-9px;
+    top:-12px;
+    width:21px;
+    height:26px;
+    margin-left:-10.5px;
   }
 
   .slot{
-    top:9px;
-    width:26px;
+    top:10px;
+    width:30px;
     height:5px;
-    margin-left:-13px;
+    margin-left:-15px;
   }
 
   .bh{
-    padding:9px 8px 5px;
-    font-size:7px;
+    padding:10px 9px 6px;
+    font-size:7.5px;
   }
 
   .bphoto{
-    margin:6px 8px 0;
+    margin:8px 9px 0;
   }
 
   .bbody{
-    padding:6px 8px 9px;
+    padding:7px 9px 10px;
   }
 
   .bbody h3{
-    font-size:11.5px;
+    font-size:12.5px;
   }
 
   .brole{
-    font-size:8.5px;
+    font-size:9px;
   }
 
   .bmeta{
-    font-size:7.5px;
-    margin-top:5px;
-    padding-top:5px;
-  }
-
-  .bcode{
-    height:10px;
-    margin-top:5px;
+    display:none;
   }
 
   .lan-hint{
@@ -1377,36 +1370,37 @@ footer{
   }
 
   #home{
-    padding-top:62px;
-    gap:12px;
+    padding-top:58px;
+    gap:16px;
   }
 
   #lan{
-    height:235px;
-    max-width:260px;
+    height:252px;
+    max-width:280px;
   }
 
   .badge{
-    width:132px;
+    width:154px;
   }
 
   h1{
-    font-size:clamp(26px,7.5vw,36px);
-    margin:6px 0;
+    font-size:clamp(26px,7.5vw,34px);
+    margin:4px 0;
   }
 
   .role{
     font-size:15px;
-    margin-bottom:8px;
+    margin:6px 0 8px;
+    min-height:24px;
   }
 
-  .lead{
-    font-size:14px;
-    line-height:1.55;
+  #home .tx p.mu{
+    font-size:13.5px;
+    line-height:1.5;
   }
 
   #home .row{
-    margin-top:16px;
+    margin-top:14px;
   }
 
   .portfolio-grid,
@@ -4365,8 +4359,8 @@ let lastFrameTime = performance.now();
 
 function updateDimensions(){
   const isMobile = window.innerWidth <= 820;
-  L = isMobile ? 8 : 17;
-  LL = isMobile ? 12 : 24;
+  L = isMobile ? 5 : 17;
+  LL = isMobile ? 8 : 24;
   maxRadius = (N - 1) * L + LL + 24;
   halfCardW = (card.offsetWidth || 176) / 2;
   ax = lan.clientWidth / 2;

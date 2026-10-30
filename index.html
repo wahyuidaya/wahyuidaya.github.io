@@ -752,8 +752,9 @@ h2.t{
 }
 
 .modal-card{
+  position:relative;
   width:min(600px,100%);
-  max-height:90vh;
+  max-height:85vh;
   overflow:auto;
   background:var(--card);
   border:1px solid var(--bd);
@@ -868,15 +869,31 @@ h2.t{
 }
 
 .modal-close{
-  width:34px;
-  height:34px;
-  border:1px solid var(--bd);
-  background:var(--bg);
-  color:var(--tx);
-  border-radius:8px;
+  position:sticky;
+  top:12px;
+  float:right;
+  margin-right:12px;
+  margin-bottom:-36px;
+  width:36px;
+  height:36px;
+  border:1px solid rgba(255,255,255,.25);
+  background:rgba(15,23,42,.75);
+  backdrop-filter:blur(4px);
+  color:#ffffff;
+  border-radius:50%;
   cursor:pointer;
-  font-size:20px;
-  flex:0 0 auto;
+  font-size:22px;
+  line-height:1;
+  display:grid;
+  place-items:center;
+  z-index:20;
+  transition:all .2s ease;
+}
+
+.modal-close:hover{
+  background:rgba(220,38,38,.9);
+  border-color:rgba(220,38,38,.9);
+  transform:scale(1.06);
 }
 
 .modal-body{
@@ -1297,16 +1314,26 @@ footer{
     grid-template-columns:1fr 1fr;
   }
 
+  .modal-bg{
+    padding:20px 18px;
+  }
+
+  .modal-card{
+    width:90%;
+    max-height:76vh;
+    border-radius:16px;
+  }
+
   .modal-image{
-    height:200px;
+    height:175px;
   }
 
   .gallery-empty{
-    height:200px;
+    height:175px;
   }
 
   .modal-head{
-    padding:14px;
+    padding:14px 16px;
   }
 
   .modal-head h3{
@@ -1314,7 +1341,7 @@ footer{
   }
 
   .modal-body{
-    padding:14px;
+    padding:14px 16px 18px;
   }
 
   .pc-thumb{
@@ -2719,6 +2746,12 @@ footer{
 
   <div class="modal-card">
 
+    <button
+      class="modal-close"
+      id="modalClose"
+      aria-label="Tutup">
+      ×
+    </button>
 
     <!-- GALLERY -->
 
@@ -2786,14 +2819,6 @@ footer{
         </p>
 
       </div>
-
-
-      <button
-        class="modal-close"
-        id="modalClose"
-        aria-label="Tutup">
-        ×
-      </button>
 
     </div>
 

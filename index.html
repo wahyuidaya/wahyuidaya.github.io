@@ -4359,9 +4359,10 @@ let lastFrameTime = performance.now();
 
 function updateDimensions(){
   const isMobile = window.innerWidth <= 820;
-  L = isMobile ? 14 : 17;
-  LL = isMobile ? 20 : 24;
-  maxRadius = (N - 1) * L + LL + 24;
+  L = isMobile ? 11 : 17;
+  LL = isMobile ? 16 : 24;
+  const restLen = (N - 1) * L + LL;
+  maxRadius = restLen * 2.5 + 45;
   halfCardW = (card.offsetWidth || 176) / 2;
   ax = lan.clientWidth / 2;
 }
@@ -4370,21 +4371,27 @@ function initPhysics(){
   updateDimensions();
   points = [];
 
+  const isMobile = window.innerWidth <= 820;
+  const swingAmp = reducedMotion ? 0 : (isMobile ? 52 : 68);
+  const swingVel = reducedMotion ? 0 : (isMobile ? 4.5 : 6.0);
+
   for(let i = 0; i <= N; i++){
-    const x = ax + (reducedMotion ? 0 : Math.sin(i * .45) * 8);
+    const ratio = i / N;
+    const x = ax + Math.sin(ratio * Math.PI * 0.5) * swingAmp;
+    const y = i * L * 0.88;
     points.push({
       x: x,
-      y: i * L,
-      px: x,
-      py: i * L
+      y: y,
+      px: x + swingVel * ratio,
+      py: y - 2 * ratio
     });
   }
   sleeping = false;
 }
 
 function physicsStep(dtScale){
-  const damp = dragging ? .94 : .982;
-  const gravity = 1.15 * dtScale;
+  const damp = dragging ? .92 : .984;
+  const gravity = 1.05 * dtScale;
 
   let totalMotion = 0;
 
@@ -4426,12 +4433,14 @@ function physicsStep(dtScale){
 
     end.px = end.x;
     end.py = end.y;
-    end.x += (targetX - end.x) * 0.85;
-    end.y += (targetY - end.y) * 0.85;
+    end.x += (targetX - end.x) * 0.82;
+    end.y += (targetY - end.y) * 0.82;
     totalMotion = 10;
   }
 
-  const iterations = 12;
+  const iterations = dragging ? 5 : 4;
+  const stiffness = dragging ? 0.36 : 0.42;
+
   for(let k = 0; k < iterations; k++){
     points[0].x = ax;
     points[0].y = 0;
@@ -4444,7 +4453,7 @@ function physicsStep(dtScale){
       const dx = b.x - a.x;
       const dy = b.y - a.y;
       const distance = Math.hypot(dx, dy) || .001;
-      const difference = (distance - length) / distance;
+      const difference = ((distance - length) / distance) * stiffness;
 
       if(dragging && i + 1 === N){
         if(i > 0){
@@ -4547,8 +4556,21 @@ function releaseDrag(event){
   }catch(e){}
 
   const p = points[N];
-  p.px = p.x - Math.max(-22, Math.min(22, vxRelease));
-  p.py = p.y - Math.max(-22, Math.min(22, vyRelease));
+  const restY = (N - 1) * L + LL;
+  const stretchX = p.x - ax;
+  const stretchY = p.y - restY;
+  const dist = Math.hypot(stretchX, stretchY);
+  const restLen = (N - 1) * L + LL;
+
+  let snapVx = vxRelease;
+  let snapVy = vyRelease;
+  if(dist > restLen * 0.25){
+    snapVx -= stretchX * 0.08;
+    snapVy -= stretchY * 0.09;
+  }
+
+  p.px = p.x - Math.max(-28, Math.min(28, snapVx));
+  p.py = p.y - Math.max(-28, Math.min(28, snapVy));
 
   card.style.cursor = "grab";
 }

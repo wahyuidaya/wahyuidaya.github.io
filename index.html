@@ -1187,17 +1187,72 @@ footer{
   }
 
   #home{
-    padding-top:80px;
+    padding-top:68px;
     min-height:auto;
-    gap:32px;
+    gap:16px;
   }
 
   #lan{
     order:-1;
-    height:390px;
+    height:260px;
     margin:0 auto;
     width:100%;
-    max-width:340px;
+    max-width:300px;
+  }
+
+  .badge{
+    width:142px;
+  }
+
+  .clip{
+    top:-11px;
+    width:18px;
+    height:22px;
+    margin-left:-9px;
+  }
+
+  .slot{
+    top:9px;
+    width:26px;
+    height:5px;
+    margin-left:-13px;
+  }
+
+  .bh{
+    padding:9px 8px 5px;
+    font-size:7px;
+  }
+
+  .bphoto{
+    margin:6px 8px 0;
+  }
+
+  .bbody{
+    padding:6px 8px 9px;
+  }
+
+  .bbody h3{
+    font-size:11.5px;
+  }
+
+  .brole{
+    font-size:8.5px;
+  }
+
+  .bmeta{
+    font-size:7.5px;
+    margin-top:5px;
+    padding-top:5px;
+  }
+
+  .bcode{
+    height:10px;
+    margin-top:5px;
+  }
+
+  .lan-hint{
+    bottom:0;
+    font-size:10px;
   }
 
   #home .tx{
@@ -1292,21 +1347,36 @@ footer{
   }
 
   #home{
-    padding-top:70px;
-    gap:24px;
+    padding-top:62px;
+    gap:12px;
   }
 
   #lan{
-    height:375px;
-    max-width:280px;
+    height:235px;
+    max-width:260px;
+  }
+
+  .badge{
+    width:132px;
   }
 
   h1{
-    font-size:clamp(28px,8vw,40px);
+    font-size:clamp(26px,7.5vw,36px);
+    margin:6px 0;
   }
 
   .role{
-    font-size:16px;
+    font-size:15px;
+    margin-bottom:8px;
+  }
+
+  .lead{
+    font-size:14px;
+    line-height:1.55;
+  }
+
+  #home .row{
+    margin-top:16px;
   }
 
   .portfolio-grid,
@@ -4238,8 +4308,10 @@ const s1 = document.getElementById("s1");
 const s2 = document.getElementById("s2");
 
 const N = 7;
-const L = 17;
-const LL = 24;
+let L = 17;
+let LL = 24;
+let maxRadius = (N - 1) * L + LL + 24;
+let halfCardW = 88;
 
 const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
@@ -4258,10 +4330,17 @@ let visible = true;
 let sleeping = false;
 let lastFrameTime = performance.now();
 
-const maxRadius = (N - 1) * L + LL + 24;
+function updateDimensions(){
+  const isMobile = window.innerWidth <= 820;
+  L = isMobile ? 8 : 17;
+  LL = isMobile ? 12 : 24;
+  maxRadius = (N - 1) * L + LL + 24;
+  halfCardW = (card.offsetWidth || 176) / 2;
+  ax = lan.clientWidth / 2;
+}
 
 function initPhysics(){
-  ax = lan.clientWidth / 2;
+  updateDimensions();
   points = [];
 
   for(let i = 0; i <= N; i++){
@@ -4383,7 +4462,7 @@ function drawPhysics(){
   angle += (targetAngle - angle) * (dragging ? .45 : .28);
 
   card.style.transform =
-    `translate3d(${(b.x - 88).toFixed(2)}px,${b.y.toFixed(2)}px,0) rotate(${(-angle).toFixed(4)}rad)`;
+    `translate3d(${(b.x - halfCardW).toFixed(2)}px,${b.y.toFixed(2)}px,0) rotate(${(-angle).toFixed(4)}rad)`;
 }
 
 function animationLoop(now){
@@ -4456,7 +4535,7 @@ new IntersectionObserver(entries => {
 }).observe(lan);
 
 window.addEventListener("resize", () => {
-  ax = lan.clientWidth / 2;
+  updateDimensions();
   lanRect = null;
   sleeping = false;
 });

@@ -12,7 +12,7 @@
 
 :root{
   --bg:#f4f6fa;
-  --bg-alt:#eaeff7;
+  --bg-alt:#e5ecf6;
   --tx:#0f172a;
   --mu:#475569;
   --card:#ffffff;
@@ -26,10 +26,10 @@
 @media(prefers-color-scheme:dark){
   :root:not([data-theme="light"]){
     --bg:#0b1120;
-    --bg-alt:#0f172a;
+    --bg-alt:#10192e;
     --tx:#f1f5f9;
     --mu:#94a3b8;
-    --card:#131c31;
+    --card:#16223b;
     --bd:#24324b;
     --navy:#1e293b;
     --sub:#93c5fd;
@@ -40,10 +40,10 @@
 
 :root[data-theme="dark"]{
   --bg:#0b1120;
-  --bg-alt:#0f172a;
+  --bg-alt:#10192e;
   --tx:#f1f5f9;
   --mu:#94a3b8;
-  --card:#131c31;
+  --card:#16223b;
   --bd:#24324b;
   --navy:#1e293b;
   --sub:#93c5fd;
@@ -134,10 +134,8 @@ section{
 }
 
 #tentang,
-#portofolio,
 #kontak{
   position:relative;
-  border-top:1px solid var(--bd);
 }
 
 #tentang::before,
@@ -150,24 +148,7 @@ section{
   width:100vw;
   transform:translateX(-50%);
   background:var(--bg-alt);
-  border-top:1px solid var(--bd);
-  border-bottom:1px solid var(--bd);
   z-index:-1;
-  pointer-events:none;
-}
-
-#tentang::after,
-#portofolio::after,
-#kontak::after{
-  content:"";
-  position:absolute;
-  top:-2px;
-  left:50%;
-  transform:translateX(-50%);
-  width:56px;
-  height:3px;
-  border-radius:3px;
-  background:var(--ac);
   pointer-events:none;
 }
 

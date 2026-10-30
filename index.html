@@ -857,7 +857,7 @@ h2.t{
 /* ================= MODAL CONTENT ================= */
 
 .modal-head{
-  padding:18px 20px;
+  padding:18px 54px 18px 20px;
   border-bottom:1px solid var(--bd);
   display:flex;
   justify-content:space-between;
@@ -1250,6 +1250,22 @@ footer{
     grid-template-columns:1fr 1fr;
   }
 
+  .modal-bg{
+    padding:20px 18px;
+  }
+
+  .modal-card{
+    width:90%;
+    max-width:440px;
+    max-height:76vh;
+    border-radius:16px;
+  }
+
+  .modal-image,
+  .gallery-empty{
+    height:185px;
+  }
+
   section{
     padding-left:16px;
     padding-right:16px;
@@ -1321,20 +1337,20 @@ footer{
 
   .modal-card{
     width:90%;
-    max-height:76vh;
+    max-height:70vh;
     border-radius:16px;
   }
 
   .modal-image{
-    height:175px;
+    height:150px;
   }
 
   .gallery-empty{
-    height:175px;
+    height:150px;
   }
 
   .modal-head{
-    padding:14px 16px;
+    padding:14px 52px 14px 16px;
   }
 
   .modal-head h3{
@@ -3675,9 +3691,11 @@ let currentImageIndex = 0;
 
 function renderGallery(){
 
+  const modalGalleryEl = document.querySelector(".modal-gallery");
+
   /*
     Kalau tidak ada gambar,
-    tampilkan placeholder.
+    sembunyikan area galeri agar modal lebih ringkas.
   */
 
   if(
@@ -3685,28 +3703,20 @@ function renderGallery(){
     currentImages.length === 0
   ){
 
-    galleryContent.innerHTML = `
+    if(modalGalleryEl) modalGalleryEl.style.display = "none";
+    galleryDots.style.display = "none";
 
-      <div class="gallery-empty">
-        Belum ada dokumentasi
-      </div>
-
-    `;
-
-    galleryPrev.style.display =
-      "none";
-
-    galleryNext.style.display =
-      "none";
-
-    galleryCounter.style.display =
-      "none";
-
-    galleryDots.innerHTML =
-      "";
+    galleryContent.innerHTML = "";
+    galleryPrev.style.display = "none";
+    galleryNext.style.display = "none";
+    galleryCounter.style.display = "none";
+    galleryDots.innerHTML = "";
 
     return;
   }
+
+  if(modalGalleryEl) modalGalleryEl.style.display = "block";
+  galleryDots.style.display = currentImages.length > 1 ? "flex" : "none";
 
 
   /*
@@ -3740,23 +3750,8 @@ function renderGallery(){
   newImage.onerror =
     function(){
 
-      this.style.display =
-        "none";
-
-      const errorBox =
-        document.createElement(
-          "div"
-        );
-
-      errorBox.className =
-        "gallery-empty";
-
-      errorBox.textContent =
-        "Gambar belum ditemukan";
-
-      galleryContent.appendChild(
-        errorBox
-      );
+      if(modalGalleryEl) modalGalleryEl.style.display = "none";
+      galleryDots.style.display = "none";
 
     };
 

@@ -440,22 +440,38 @@ h2.t{
 
 .ab{
   display:grid;
-  grid-template-columns:1.3fr 1fr;
-  gap:36px;
+  grid-template-columns:1fr;
+  gap:24px;
   align-items:start;
 }
 
-.pic{
-  border-radius:12px;
-  aspect-ratio:4/5;
-  background:var(--card);
-  border:1px dashed var(--bd);
+.ab-stats{
   display:grid;
-  place-items:center;
-  text-align:center;
-  padding:24px;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:12px;
+  margin-top:20px;
+}
+
+.ab-stat{
+  background:var(--card);
+  border:1px solid var(--bd);
+  border-radius:10px;
+  padding:14px 16px;
+}
+
+.ab-stat strong{
+  display:block;
+  font-size:20px;
+  font-weight:800;
+  color:var(--ac);
+  line-height:1.2;
+}
+
+.ab-stat span{
+  display:block;
+  font-size:12.5px;
   color:var(--mu);
-  font-size:14px;
+  margin-top:3px;
 }
 
 /* ================= PORTFOLIO ================= */
@@ -1303,12 +1319,11 @@ footer{
   }
 
   .ab{
-    gap:24px;
+    gap:20px;
   }
 
-  .pic{
-    max-width:300px;
-    margin:0 auto;
+  .ab-stats{
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
   nav .brand{
@@ -1674,6 +1689,25 @@ footer{
       <p class="mu" style="margin-top:10px">
         Saya merupakan lulusan Sistem Informasi yang memiliki pengalaman mengerjakan berbagai proyek pengembangan aplikasi web. Proses pengerjaan mencakup analisis dan perancangan sistem, pengelolaan basis data, perancangan antarmuka pengguna, serta pengujian aplikasi.</p>
 
+      <div class="ab-stats">
+        <div class="ab-stat">
+          <strong>S1</strong>
+          <span>Sistem Informasi</span>
+        </div>
+        <div class="ab-stat">
+          <strong>3,69 / 4,00</strong>
+          <span>IPK Universitas Gunadarma</span>
+        </div>
+        <div class="ab-stat">
+          <strong>6+ Proyek</strong>
+          <span>Aplikasi Web &amp; Sistem</span>
+        </div>
+        <div class="ab-stat">
+          <strong>11+ Sertifikasi</strong>
+          <span>BNSP &amp; Pelatihan IT</span>
+        </div>
+      </div>
+
       <div class="tl">
 
   <div class="box">
@@ -1751,22 +1785,6 @@ footer{
         <a class="btn" href="#">
           Lihat CV
         </a>
-
-      </div>
-
-    </div>
-
-
-    <div class="pic">
-
-      <div class="bphoto">
-
-        <img
-          alt="Foto profil"
-          draggable="false"
-          id="ph"
-          src="background.jpeg"
-        >
 
       </div>
 

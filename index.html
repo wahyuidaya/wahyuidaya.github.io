@@ -822,6 +822,12 @@
       object-fit: cover;
     }
 
+    .modal-image.cert-img {
+      height: 360px;
+      object-fit: contain;
+      background: #f8f5ef;
+    }
+
     .gallery-empty {
       height: 300px;
       display: flex;
@@ -1517,6 +1523,10 @@
 
       .modal-image {
         height: 150px;
+      }
+
+      .modal-image.cert-img {
+        height: 230px;
       }
 
       .gallery-empty {
@@ -3607,7 +3617,7 @@
           ],
           tools: ["Web Development", "Backend Logic", "Database Integration", "Client-Server"],
           certificate: "https://e-sert.gunadarma.ac.id/cert/5623/signed_903c8e3a72bcc9fb9c223ac4c3a9d964.pdf.pdf",
-          images: []
+          images: ["images/cert-basic-web-dev.jpg", "images/cert-basic-web-dev-p2.jpg"]
         },
 
         "Basic Web Application Design": {
@@ -3621,7 +3631,7 @@
           ],
           tools: ["UI/UX Design", "Wireframing", "Responsive Layout", "Web Interface"],
           certificate: "https://e-sert.gunadarma.ac.id/cert/5474/signed_06f4b257b99683b167d62248d68c686f.pdf.pdf",
-          images: []
+          images: ["images/cert-basic-web-design.jpg", "images/cert-basic-web-design-p2.jpg"]
         },
 
         "GO-LANG FOR INTERMEDIATE": {
@@ -3635,7 +3645,7 @@
           ],
           tools: ["Go (Golang)", "Goroutines", "Channels", "Backend Development", "Memory Efficiency"],
           certificate: "https://e-sert.gunadarma.ac.id/cert/5326/signed_2f17b4b2cf0c61849d6eaef531b2bd5f.pdf.pdf",
-          images: []
+          images: ["images/cert-golang-intermediate.jpg", "images/cert-golang-intermediate-p2.jpg"]
         },
 
         "Building Website using HTML 5": {
@@ -3649,7 +3659,7 @@
           ],
           tools: ["HTML5", "Semantic Web", "Web Structure", "Frontend"],
           certificate: "https://e-sert.gunadarma.ac.id/cert/4197/a508ba3b40cb640dff4616d503a10de0.pdf",
-          images: []
+          images: ["images/cert-html5.jpg", "images/cert-html5-p2.jpg"]
         },
 
         "GO-LANG FOR BEGINNER": {
@@ -3663,7 +3673,7 @@
           ],
           tools: ["Go (Golang)", "Syntax Fundamentals", "Pointers", "Data Types"],
           certificate: "https://e-sert.gunadarma.ac.id/cert/3998/signed_ecefa4ec5caab6eef655096e11b20f6e.pdf.pdf",
-          images: []
+          images: ["images/cert-golang-beginner.jpg", "images/cert-golang-beginner-p2.jpg"]
         },
 
         "FUNDAMENTAL WEB PROGRAMMING": {
@@ -3677,7 +3687,7 @@
           ],
           tools: ["Web Fundamentals", "HTML", "CSS", "JavaScript Dasar"],
           certificate: "https://e-sert.gunadarma.ac.id/cert/5239/signed_a44b17a8405046ef6e14fbbb37917862.pdf.pdf",
-          images: []
+          images: ["images/cert-fundamental-web.jpg", "images/cert-fundamental-web-p2.jpg"]
         },
 
         "WIDE AREA NETWORK USING CISCO ROUTER FOR INTERMEDIATE": {
@@ -3691,7 +3701,7 @@
           ],
           tools: ["Cisco Router", "WAN", "Dynamic Routing", "OSPF", "Network Security"],
           certificate: "https://e-sert.gunadarma.ac.id/cert/5263/signed_f15b16ac5d23ff145f9fbba0ddc741d4.pdf.pdf",
-          images: []
+          images: ["images/cert-wan-cisco.jpg", "images/cert-wan-cisco-p2.jpg"]
         },
 
         "Introduction to wireless LAN installation": {
@@ -3705,7 +3715,7 @@
           ],
           tools: ["Wireless LAN", "Wi-Fi", "Access Point", "WLAN Security", "Networking"],
           certificate: "https://e-sert.gunadarma.ac.id/cert/4780/signed_b9c886b6e8ecbebb6d262f1a2c5ecb06.pdf.pdf",
-          images: []
+          images: ["images/cert-wlan.jpg", "images/cert-wlan-p2.jpg"]
         },
 
         "LOCAL AREA NETWORK USING CISCO ROUTER": {
@@ -3719,7 +3729,7 @@
           ],
           tools: ["Cisco CLI", "LAN", "Subnetting IPv4", "Static Routing", "Switching"],
           certificate: "https://e-sert.gunadarma.ac.id/cert/2624/signed_55edc63b3905635206a4f176820de85d.pdf.pdf",
-          images: []
+          images: ["images/cert-lan-cisco.jpg", "images/cert-lan-cisco-p2.jpg"]
         },
 
         "FUNDAMENTAL NETWORKING": {
@@ -3733,7 +3743,7 @@
           ],
           tools: ["Computer Networking", "OSI Layer", "TCP/IP", "UTP Cabling", "Topologi"],
           certificate: "https://e-sert.gunadarma.ac.id/cert/2656/signed_8c36d0f1e8e1390dd9b3dc30c80d40f2.pdf.pdf",
-          images: []
+          images: ["images/cert-fundamental-net.jpg", "images/cert-fundamental-net-p2.jpg"]
         },
 
         "Aptitude Test": {
@@ -3747,7 +3757,7 @@
           ],
           tools: ["Logical Reasoning", "Analytical Thinking", "Problem Solving", "Aptitude"],
           certificate: "https://e-sert.gunadarma.ac.id/cert/5681/signed_e49fb769d722bcf42e3fef95d0a5ac22.pdf.pdf",
-          images: []
+          images: ["images/cert-aptitude.jpg", "images/cert-aptitude-p2.jpg"]
         }
 
       }
@@ -3845,12 +3855,15 @@
         Buat gambar utama.
       */
 
+      const srcUrl = currentImages[currentImageIndex];
+      const isCertImg = srcUrl.indexOf("cert-") !== -1 || srcUrl.indexOf("sertifikat-") !== -1;
+
       galleryContent.innerHTML = `
 
     <img
-      class="modal-image"
+      class="modal-image${isCertImg ? ' cert-img' : ''}"
       id="modalImage"
-      src="${currentImages[currentImageIndex]}"
+      src="${srcUrl}"
       alt="Dokumentasi proyek"
     >
 
@@ -4683,37 +4696,37 @@
           "images/sertifikat-bnsp.png",
 
         "Aptitude Test":
-          "linear-gradient(135deg,#0f2027 0%,#203a43 50%,#2c5364 100%)",
+          "images/cert-aptitude-thumb.jpg",
 
         "Basic Web Application Development":
-          "linear-gradient(135deg,#16213e 0%,#0f3460 60%,#533483 100%)",
+          "images/cert-basic-web-dev-thumb.jpg",
 
         "Basic Web Application Design":
-          "linear-gradient(135deg,#1a1a2e 0%,#16213e 50%,#e94560 100%)",
+          "images/cert-basic-web-design-thumb.jpg",
 
         "GO-LANG FOR INTERMEDIATE":
-          "linear-gradient(135deg,#00add8 0%,#007d9c 100%)",
+          "images/cert-golang-intermediate-thumb.jpg",
 
         "GO-LANG FOR BEGINNER":
-          "linear-gradient(135deg,#5dc9e2 0%,#00add8 100%)",
+          "images/cert-golang-beginner-thumb.jpg",
 
         "WIDE AREA NETWORK USING CISCO ROUTER FOR INTERMEDIATE":
-          "linear-gradient(135deg,#1b4f72 0%,#1a5276 50%,#2e86c1 100%)",
+          "images/cert-wan-cisco-thumb.jpg",
 
         "LOCAL AREA NETWORK USING CISCO ROUTER":
-          "linear-gradient(135deg,#154360 0%,#1f618d 100%)",
+          "images/cert-lan-cisco-thumb.jpg",
 
         "Introduction to wireless LAN installation":
-          "linear-gradient(135deg,#0e6655 0%,#148f77 100%)",
+          "images/cert-wlan-thumb.jpg",
 
         "Building Website using HTML 5":
-          "linear-gradient(135deg,#e44d26 0%,#f16529 100%)",
+          "images/cert-html5-thumb.jpg",
 
         "FUNDAMENTAL WEB PROGRAMMING":
-          "linear-gradient(135deg,#2c3e50 0%,#3498db 100%)",
+          "images/cert-fundamental-web-thumb.jpg",
 
         "FUNDAMENTAL NETWORKING":
-          "linear-gradient(135deg,#1c2833 0%,#2980b9 100%)",
+          "images/cert-fundamental-net-thumb.jpg",
 
       };
 

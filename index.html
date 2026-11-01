@@ -1995,8 +1995,8 @@
           <h3>Sistem Informasi Inventaris Coffee Shop (JWP Coffee)</h3>
           <p class="pc-org">JWP Coffee</p>
           <p class="pc-desc">
-            Aplikasi manajemen stok bahan baku berbasis Laravel 12 & MySQL untuk 2 peran (Admin & Pimpinan), dilengkapi
-            grafik stok 30 hari (Chart.js), validasi transaksi keluar, peringatan stok minimum, serta ekspor Excel & PDF.
+            Aplikasi manajemen stok bahan baku berbasis Laravel 12, Blade, & MySQL untuk 2 peran (Admin & Pimpinan),
+            dilengkapi grafik stok 30 hari (Chart.js), validasi transaksi keluar, peringatan stok minimum, serta laporan stok.
           </p>
           <button class="btn detail-btn" data-type="project"
             data-title="Sistem Informasi Inventaris Coffee Shop (JWP Coffee)" data-org="JWP Coffee"
@@ -3356,18 +3356,18 @@
             "Berperan sebagai Programmer dalam tim pengembang lintas fungsi (Project Manager, System Analyst, UI/UX Designer, Programmer, dan QA Tester) bekerja sama langsung dengan Staf Program Studi Sistem Informasi Universitas Gunadarma selaku klien/stakeholder utama menggunakan metode Rapid Application Development (RAD). Mengembangkan sistem pengelolaan magang mandiri terintegrasi mulai dari perencanaan kebutuhan klien, evaluasi prototipe, implementasi kode, hingga pengujian pengguna (UAT) dan serah terima resmi aplikasi (BAST).",
           points: [
             "Perencanaan kebutuhan & kolaborasi klien (RAD): Bekerja sama dalam tim lintas fungsi (PM, System Analyst, UI/UX Designer, QA) untuk menerjemahkan hasil wawancara kebutuhan Staf Prodi Sistem Informasi dan pemodelan proses bisnis (BPMN) ke dalam solusi sistem berbasis web",
-            "Desain sistem & evaluasi prototipe: Mengonversi dokumen spesifikasi kebutuhan (SRS), desain arsitektur (SDD: Use Case, Activity, Class Diagram), perancangan database, serta evaluasi prototipe antarmuka menjadi kode program (Back-End & Front-End) yang fungsional dan modular",
+            "Desain sistem & evaluasi prototipe: Mengonversi dokumen spesifikasi kebutuhan (SRS), desain arsitektur (SDD: Use Case, Activity, Class Diagram), perancangan database MySQL (`db_magang`), serta evaluasi prototipe antarmuka menjadi kode program (Back-End & Front-End) yang fungsional dan modular",
             "Pengembangan sistem multi-role (4 aktor pengguna nyata): Membangun alur kerja terintegrasi bagi Mahasiswa (pengajuan magang, unggah silabus & laporan, unduh konversi SKS/nilai), Staf Prodi (verifikasi berkas, plotting dospem & mitra, kelola konversi SKS), Dosen Pembimbing (monitoring & review laporan), serta Mitra Industri (penentuan periode, silabus, & unggah penilaian)",
-            "Otomasi proses & dokumen digital: Mengintegrasikan fitur ekstraksi data berkas KRS otomatis via PDFParser serta pembuatan surat pengantar, lembar konversi, dan penilaian magang secara digital via DomPDF",
+            "Otomasi proses & dokumen digital: Mengintegrasikan fitur verifikasi berkas pendaftaran (KRS & Transkrip PDF) serta pembuatan dokumen resmi seperti Surat Pengantar Magang, Lembar Konversi SKS, dan Laporan Penilaian secara digital dalam format PDF (TCPDF)",
             "Pengujian Black Box, UAT & Serah Terima Klien (BAST): Berkolaborasi dalam pengujian Black Box (32+ skenario), memfasilitasi User Acceptance Testing (UAT) pada 31 use case uji bersama pengguna di lingkungan Prodi SI, penyusunan Manual Book, hingga penandatanganan Berita Acara Serah Terima (BAST) aplikasi"
           ],
           tools: [
-            "Laravel 12",
-            "PHP 8.2",
-            "MySQL (TiDB Cloud)",
-            "Blade & Tailwind",
-            "RAD & BPMN",
-            "UAT & BAST Klien"
+            "PHP",
+            "MySQL",
+            "HTML, CSS, JavaScript",
+            "TCPDF",
+            "XAMPP",
+            "UML & BPMN"
           ],
           github: "https://github.com/wahyuidaya/pengajuan_magang_mandiri",
           demo: "https://pengajuan-magang-mandiri.vercel.app",
@@ -3378,19 +3378,20 @@
           desc:
             "Berperan sebagai Full-Stack Developer (end-to-end) yang berkolaborasi langsung dengan pemilik usaha kedai kopi CoffeeBox_Jkt (Pulo Gadung, Jakarta Timur) sebagai klien/mitra UMKM. Mengadopsi metode Rapid Application Development (RAD) yang melibatkan klien dan pengguna secara aktif sejak perencanaan kebutuhan, validasi desain bertahap, implementasi full-stack, hingga pengujian UAT langsung di lingkungan operasional kedai.",
           points: [
-            "Analisis kebutuhan & iterasi desain bersama klien (RAD): Melakukan observasi alur operasional kedai dan sesi validasi rancangan bertahap bersama pemilik CoffeeBox_Jkt, menghasilkan penyesuaian fitur nyata seperti paket Bundling, Diskon berperiode, toggle varian suhu Iced/Hot, filter transaksi bulanan kasir, serta pembagian hak akses Super Admin & Admin Level 2",
+            "Analisis kebutuhan & iterasi desain bersama klien (RAD): Melakukan observasi alur operasional kedai dan sesi validasi rancangan bertahap di Figma bersama pemilik CoffeeBox_Jkt, menghasilkan penyesuaian fitur nyata seperti paket Bundling, Diskon berperiode, toggle varian suhu Iced/Hot, filter transaksi bulanan kasir, serta pembagian hak akses Super Admin & Admin Level 2",
             "Pengembangan modul Pelanggan (QR Code Table Ordering): Membangun antarmuka pemesanan mandiri tanpa login melalui pemindaian QR meja dengan katalog menu kategori, pencarian, kustomisasi varian & catatan, pembayaran Cash/QRIS (unggah bukti bayar), serta pelacakan status pesanan real-time",
             "Pengembangan modul Kasir & Admin Operasional: Membangun dashboard kasir real-time untuk konfirmasi pembayaran, verifikasi bukti QRIS, manajemen status antrean pesanan (Diproses, Disiapkan, Diantar, Selesai/Dibatalkan), cetak struk pembayaran, serta dashboard Admin untuk analitik grafik pendapatan, kelola menu/bundling, dan generator QR Code meja",
-            "Implementasi arsitektur Full-Stack & Database: Merancang dan mengimplementasikan 7 tabel relasional MySQL (Pengguna, Menu, Item Bundling, Meja, Pesanan, Detail Pesanan, QRIS) menggunakan Next.js App Router, TypeScript, Prisma ORM, dan Tailwind CSS",
+            "Implementasi arsitektur Full-Stack & Database: Merancang diagram sistem di Draw.io dan mengimplementasikan 7 tabel relasional MySQL (Pengguna, Menu, Item Bundling, Meja, Pesanan, Detail Pesanan, QRIS) menggunakan Next.js, React.js, TypeScript, dan Tailwind CSS",
             "Pengujian Black Box, Lintas Perangkat & UAT bersama 14 Pengguna Nyata: Melaksanakan pengujian fungsional Black Box pada 3 peran pengguna, uji kompatibilitas browser/smartphone (iOS & Android), serta User Acceptance Testing (UAT) langsung di kedai CoffeeBox_Jkt bersama 14 responden (2 Admin/Pemilik, 2 Staf Kasir, dan 10 Pelanggan) dengan hasil 100% skenario valid dan diterima"
           ],
           tools: [
-            "Next.js 14",
+            "Next.js",
+            "React.js",
             "TypeScript",
-            "Prisma ORM",
-            "MySQL (TiDB Cloud)",
             "Tailwind CSS",
-            "RAD & UAT Klien"
+            "MySQL & phpMyAdmin",
+            "Figma & Draw.io",
+            "Visual Studio Code"
           ],
           demo: "https://coffeeboxjkt.vercel.app",
           github: "https://github.com/wahyuidaya/coffeebox_jkt",
@@ -3417,20 +3418,23 @@
           desc:
             "Sistem pemesanan menu berbasis QR Code pada Kedai Kopi CoffeeBox_Jkt yang dikembangkan bersama klien mitra UMKM menggunakan metode Rapid Application Development (RAD) untuk mendigitalkan pemesanan mandiri di meja pelanggan, antrean kasir real-time, serta manajemen laporan penjualan.",
           points: [
-            "Analisis kebutuhan langsung melalui observasi alur operasional kedai dan sesi diskusi bersama pemilik serta staf CoffeeBox_Jkt",
-            "Perancangan UML (Use Case, Activity, Sequence, Class Diagram) dan basis data relasional 7 tabel (`User`, `Category`, `Menu`, `MenuVariant`, `Table`, `Order`, `OrderItem`)",
-            "Antarmuka Pelanggan via scan QR meja: katalog menu interaktif, pemilihan varian suhu/ukuran/gula, pembayaran Tunai atau QRIS (unggah bukti bayar), dan pelacakan status pesanan real-time",
-            "Portal Kasir & Admin: antrean pesanan masuk berbunyi otomatis, verifikasi pembayaran, cetak struk kasir, CRUD menu & generator QR meja, serta laporan analitik pendapatan (harian, mingguan, bulanan)",
-            "Pengujian komprehensif melalui Black Box Testing (23 skenario uji 100% valid) dan User Acceptance Testing (UAT) bersama 14 pengguna nyata (Admin, Kasir, dan Pelanggan)",
+            "Analisis kebutuhan langsung melalui observasi alur operasional kedai dan validasi prototipe antarmuka (Figma) bersama pemilik serta staf CoffeeBox_Jkt",
+            "Perancangan UML & struktur navigasi menggunakan Draw.io serta implementasi basis data MySQL 7 tabel (Pengguna, Menu, Item Bundling, Meja, Pesanan, Detail Pesanan, QRIS) via phpMyAdmin",
+            "Antarmuka Pelanggan via scan QR meja: katalog menu interaktif, pemilihan varian suhu (Iced/Hot), paket bundling, pembayaran Cash atau QRIS (unggah bukti bayar), dan pelacakan status pesanan real-time",
+            "Portal Kasir & Admin: konfirmasi pembayaran & bukti QRIS, manajemen status antrean pesanan, cetak struk kasir, CRUD menu & generator QR meja, serta laporan analitik pendapatan",
+            "Pengujian komprehensif melalui Black Box Testing dan User Acceptance Testing (UAT) bersama 14 pengguna nyata (2 Admin, 2 Kasir, dan 10 Pelanggan)",
             "Tersedia portal pemilih peran demo langsung untuk menguji alur Pelanggan Meja 01, Kasir, dan Admin"
           ],
           tools: [
-            "Next.js 14",
+            "Next.js",
+            "React.js",
             "TypeScript",
             "Tailwind CSS",
-            "Prisma ORM",
-            "MySQL (TiDB Cloud)",
-            "RAD Methodology"
+            "MySQL",
+            "phpMyAdmin",
+            "Figma",
+            "Draw.io",
+            "Visual Studio Code"
           ],
           demo: "https://coffeeboxjkt.vercel.app",
           github: "https://github.com/wahyuidaya/coffeebox_jkt",
@@ -3453,17 +3457,14 @@
             "Manajemen Master Data: CRUD Kategori Bahan Baku (`categories`) dan Daftar Bahan Baku (`products`) lengkap dengan kode unik (misal KB-001), satuan unit, serta batas stok minimum",
             "Transaksi Bahan Masuk & Keluar (`stock_transactions`): kalkulasi otomatis stok sebelum & sesudah transaksi, disertai aturan bisnis penolakan otomatis jika stok keluar melebihi stok tersedia",
             "Sistem indikator peringatan dini (flag Stok Rendah) apabila jumlah stok bahan baku berada di bawah batas minimum (default: 10)",
-            "Laporan Stok & Ekspor: filter laporan berdasarkan rentang tanggal, kategori, dan tipe transaksi, dilengkapi grafik transaksi bulanan serta fitur Export Excel (PhpSpreadsheet) dan Export PDF (DomPDF)"
+            "Laporan Stok: filter laporan daftar bahan masuk/keluar dan jumlah stok berdasarkan rentang tanggal, kategori, dan tipe transaksi, dilengkapi grafik transaksi bulanan serta fitur ekspor laporan"
           ],
           tools: [
             "Laravel 12",
-            "PHP 8.2",
+            "PHP",
             "MySQL",
             "Blade Laravel",
-            "Chart.js",
-            "Tailwind CSS",
-            "DomPDF",
-            "PhpSpreadsheet"
+            "Chart.js"
           ],
           github: "https://github.com/wahyuidaya/inventory_jwpcoffee",
           demo: "https://inventoryjwpcoffee.vercel.app",
@@ -3474,21 +3475,20 @@
           desc:
             "Sistem informasi manajemen pengajuan dan pelaksanaan magang mandiri berbasis web pada Program Studi Sistem Informasi Universitas Gunadarma. Dikembangkan secara kolaboratif dalam tim lintas fungsi menggunakan metode Rapid Application Development (RAD) dan pemodelan BPMN bersama Staf Prodi selaku pengguna (client/stakeholder).",
           points: [
-            "Terintegrasi untuk 4 aktor pengguna: Mahasiswa, Staf Program Studi (Koordinator Magang), Dosen Pembimbing, dan Mitra Industri (Supervisor Perusahaan)",
-            "Otomasi ekstraksi dokumen KRS Mahasiswa (PDF) menggunakan pustaka `smalot/pdfparser` untuk mendeteksi daftar mata kuliah dan jumlah SKS yang dapat dikonversi secara otomatis",
-            "Alur persetujuan berjenjang & penomoran surat otomatis oleh Staf Prodi, dilanjutkan pembuatan akun Mitra Industri otomatis beserta pengiriman kredensial login via SMTP Gmail",
-            "Portal Mitra Industri & Dosen Pembimbing: konfirmasi penerimaan mahasiswa, unggah silabus, persetujuan laporan/logbook kegiatan harian, serta input nilai akhir evaluasi magang",
-            "Perancangan arsitektur 13 tabel relasional MySQL dengan fitur keamanan pencatatan Jejak Audit (`ActivityLogs`) dan pembuatan dokumen resmi otomatis (`barryvdh/laravel-dompdf`)",
-            "Lulus pengujian Black Box Testing, User Acceptance Testing (UAT), dan resmi diserahterimakan kepada pihak Program Studi melalui Berita Acara Serah Terima (BAST)"
+            "Terintegrasi untuk 4 aktor pengguna: Mahasiswa, Staf Program Studi, Dosen Pembimbing, dan Mitra Perusahaan",
+            "Pendaftaran & pengajuan magang mandiri online dengan unggah berkas persyaratan (KRS, Transkrip Nilai, dan bukti penerimaan instansi dalam format PDF)",
+            "Verifikasi pengajuan oleh Staf Prodi, penambahan & penunjukan (plotting) Dosen Pembimbing, kelola data mitra perusahaan, serta pengelolaan konversi SKS",
+            "Portal Mitra Perusahaan & Dosen Pembimbing: penentuan periode magang, unggah silabus dari mitra, pemberian komentar/persetujuan laporan bulanan & laporan akhir mahasiswa, serta input penilaian",
+            "Perancangan arsitektur basis data relasional MySQL (`db_magang`) dengan koneksi PHP MySQLi/PDO serta fitur ekspor dokumen resmi (Surat Pengantar & Surat Konversi Nilai) ke format PDF menggunakan pustaka TCPDF",
+            "Lulus pengujian Black Box Testing, User Acceptance Testing (UAT) pada 31 use case uji, dan resmi diserahterimakan kepada pihak Program Studi melalui Berita Acara Serah Terima (BAST)"
           ],
           tools: [
-            "Laravel 12",
-            "PHP 8.2",
-            "MySQL (TiDB Cloud)",
-            "Tailwind CSS",
-            "DomPDF",
-            "PDFParser",
-            "RAD & BPMN"
+            "PHP",
+            "MySQL (MySQLi / PDO)",
+            "HTML, CSS, JavaScript",
+            "TCPDF",
+            "XAMPP (Apache)",
+            "UML & BPMN"
           ],
           github: "https://github.com/wahyuidaya/pengajuan_magang_mandiri",
           demo: "https://pengajuan-magang-mandiri.vercel.app",
@@ -3503,16 +3503,18 @@
             "Peran Mahasiswa: registrasi & verifikasi email, eksplorasi lowongan & profil perusahaan (dengan pagination & hitung mundur batas waktu), unggah berkas CV (PDF), pantau status lamaran (Diproses/Diterima), serta cetak Kartu Peserta berkode unik",
             "Peran Perusahaan: registrasi & verifikasi akun via email, kelola profil & logo perusahaan, CRUD lowongan magang, tinjau berkas CV pelamar, terima pelamar (otomatis mengirim email notifikasi penerimaan), serta cetak rekapitulasi pendaftar diterima",
             "Peran Admin: autentikasi terpisah, dashboard statistik (total perusahaan, mahasiswa, lowongan), serta moderasi/penghapusan akun pengguna dan lowongan yang melanggar ketentuan",
-            "Arsitektur basis data MySQL (`dbmagangid`) dengan 4 tabel terstruktur: `admin`, `pengguna` (superclass mahasiswa & perusahaan dengan token verifikasi), `lowongan`, dan `pendaftar`",
-            "Telah diuji menggunakan Black Box Testing (28 skenario uji pada 3 peran), uji kompatibilitas lintas browser (Chrome & Edge) dan perangkat smartphone, serta di-deploy pada layanan hosting cPanel (`magangid.my.id`)"
+            "Arsitektur basis data MySQL (`dbmagangid`) yang dikelola melalui phpMyAdmin dengan 4 tabel terstruktur: `admin`, `pengguna`, `lowongan`, dan `pendaftar`",
+            "Telah diuji menggunakan Black Box Testing (28 skenario uji pada 3 peran), uji kompatibilitas lintas browser (Chrome & Edge) dan perangkat smartphone, serta di-deploy pada layanan hosting cPanel Rumahweb (`magangid.my.id`)"
           ],
           tools: [
-            "PHP Native",
+            "PHP",
             "MySQL",
-            "PHPMailer",
-            "HTML5 & CSS3",
+            "HTML & CSS",
             "JavaScript",
-            "SDLC & UML"
+            "XAMPP",
+            "phpMyAdmin",
+            "Visual Studio Code",
+            "cPanel Hosting"
           ],
           github: "https://github.com/wahyuidaya/magang_id",
           demo: "https://magangid.vercel.app",
@@ -3531,12 +3533,11 @@
             "Manajemen Profil Web (`tb_settings`): pengaturan dinamis nama website, nomor telepon, email, alamat, peta lokasi, logo, tautan media sosial, dan jam operasional"
           ],
           tools: [
-            "PHP Native",
+            "PHP",
             "MySQL",
-            "HTML5 & CSS3",
-            "JavaScript",
+            "XAMPP",
             "Draw.io",
-            "XAMPP"
+            "Google Chrome"
           ],
           github: "https://github.com/wahyuidaya/wedding_jewepe",
           demo: "https://weddingjewepe.vercel.app",
@@ -3548,17 +3549,17 @@
             "Aplikasi web pemesanan tiket kereta api online (`TiketKeretaApp`) yang dirancang untuk meningkatkan efisiensi reservasi tiket, akurasi informasi jadwal keberangkatan, serta pengelolaan data penumpang dan jadwal perjalanan secara terpusat.",
           points: [
             "Perancangan arsitektur sistem berbasis Entity-Relationship Diagram (ERD) dan Data Flow Diagram (DFD) untuk memetakan alur transaksi antara Penumpang dan Admin",
-            "Implementasi basis data relasional MySQL (`kereta_api`) yang terdiri dari 5 tabel berelasi: `Login_Pengguna`, `Admin`, `Penumpang`, `Kereta`, dan `Tiket`",
+            "Implementasi basis data relasional SQL (`kereta_api`) yang terdiri dari 5 tabel berelasi: `Login_Pengguna`, `Admin`, `Penumpang`, `Kereta`, dan `Tiket`",
             "Autentikasi multi-peran: registrasi & login pengguna untuk calon penumpang serta portal Admin untuk pengelolaan jadwal keberangkatan dan data tiket",
             "Formulir Pemesanan Tiket interaktif: pengisian profil penumpang (nama, telepon, alamat) serta pemilihan rute tujuan, kelas kereta, tanggal & jam keberangkatan, nomor tempat duduk, dan harga tiket",
             "Fitur Cetak Tiket Digital yang merangkum Informasi Penumpang dan Informasi Perjalanan secara terstruktur siap cetak/simpan"
           ],
           tools: [
-            "PHP Native",
-            "MySQL",
-            "ERD & DFD",
-            "HTML5 & CSS3",
-            "JavaScript"
+            "PHP",
+            "MySQL (SQL)",
+            "HTML & CSS",
+            "XAMPP",
+            "ERD & Data Flow"
           ],
           github: "https://github.com/wahyuidaya/kereta_api",
           demo: "https://keretaapi-coral.vercel.app",
@@ -3572,12 +3573,12 @@
             "Antarmuka halaman utama (Home) & Tentang Kami (About) yang menampilkan identitas visual kedai kopi, cerita latar belakang, dan suasana tempat secara responsif",
             "Katalog Menu digital (Menu) yang menyajikan daftar minuman kopi, non-kopi, dan makanan pendamping lengkap dengan foto produk serta informasi harga",
             "Fitur pencarian menu interaktif pada bilah navigasi (navbar) menggunakan JavaScript untuk memudahkan pengunjung menemukan produk secara cepat",
-            "Halaman Kontak (Contact) terintegrasi dengan AJAX Fetch API dan backend PHP untuk mengirim serta menyimpan pesan pengunjung ke dalam basis data MySQL tanpa memuat ulang halaman"
+            "Halaman Kontak (Contact) terintegrasi dengan backend PHP dan basis data MySQL untuk mengirim serta menyimpan pesan pengunjung"
           ],
           tools: [
-            "HTML5",
-            "CSS3",
-            "JavaScript (Fetch API)",
+            "HTML",
+            "CSS",
+            "JavaScript",
             "PHP",
             "MySQL"
           ],

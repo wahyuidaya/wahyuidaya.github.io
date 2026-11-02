@@ -3309,14 +3309,14 @@
 
 
     /* ================================================= */
-    /* LOAD MORE / SHOW ALL TOGGLE (MAX 3 CARDS INITIALLY) */
+    /* LOAD MORE / SHOW ALL TOGGLE (MAX 4 CARDS INITIALLY) */
     /* ================================================= */
 
     document.querySelectorAll(".portfolio-panel").forEach(panel => {
       const cards = panel.querySelectorAll(".portfolio-grid > .portfolio-card");
-      if (cards.length > 3) {
+      if (cards.length > 4) {
         cards.forEach((card, idx) => {
-          if (idx >= 3) {
+          if (idx >= 4) {
             card.classList.add("is-hidden");
           }
         });
@@ -3343,7 +3343,7 @@
           btn.classList.toggle("is-expanded", expanded);
 
           cards.forEach((card, idx) => {
-            if (idx >= 3) {
+            if (idx >= 4) {
               card.classList.toggle("is-hidden", !expanded);
             }
           });

@@ -3308,22 +3308,19 @@
     );
 
 
-    /* ================================================= */
-    /* LOAD MORE / SHOW ALL TOGGLE (MAX 4 CARDS INITIALLY) */
-    /* ================================================= */
+    /* ========================================================= */
+    /* LOAD MORE / SHOW ALL TOGGLE (3 DESKTOP, 2 MOBILE)        */
+    /* ========================================================= */
+
+    const getInitialCardLimit = () => (window.innerWidth <= 768 ? 2 : 3);
 
     document.querySelectorAll(".portfolio-panel").forEach(panel => {
       const cards = panel.querySelectorAll(".portfolio-grid > .portfolio-card");
-      if (cards.length > 4) {
-        cards.forEach((card, idx) => {
-          if (idx >= 4) {
-            card.classList.add("is-hidden");
-          }
-        });
+      if (cards.length === 0) return;
 
-        const wrap = document.createElement("div");
-        wrap.className = "load-more-wrap";
-        wrap.innerHTML = `
+      const wrap = document.createElement("div");
+      wrap.className = "load-more-wrap";
+      wrap.innerHTML = `
       <button class="btn-more" type="button">
         <span class="btn-more-txt">Lihat Semua (${cards.length})</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -3332,25 +3329,33 @@
       </button>
     `;
 
-        panel.appendChild(wrap);
+      panel.appendChild(wrap);
 
-        const btn = wrap.querySelector(".btn-more");
-        const txt = wrap.querySelector(".btn-more-txt");
-        let expanded = false;
+      const btn = wrap.querySelector(".btn-more");
+      const txt = wrap.querySelector(".btn-more-txt");
+      let expanded = false;
 
-        btn.addEventListener("click", () => {
-          expanded = !expanded;
-          btn.classList.toggle("is-expanded", expanded);
+      const applyCardLimit = () => {
+        const limit = getInitialCardLimit();
+        const needsToggle = cards.length > limit;
+        wrap.style.display = needsToggle ? "" : "none";
 
-          cards.forEach((card, idx) => {
-            if (idx >= 4) {
-              card.classList.toggle("is-hidden", !expanded);
-            }
-          });
-
-          txt.textContent = expanded ? "Tampilkan Lebih Sedikit" : `Lihat Semua (${cards.length})`;
+        cards.forEach((card, idx) => {
+          card.classList.toggle("is-hidden", !expanded && idx >= limit);
         });
-      }
+
+        btn.classList.toggle("is-expanded", expanded);
+        txt.textContent = expanded ? "Tampilkan Lebih Sedikit" : `Lihat Semua (${cards.length})`;
+      };
+
+      applyCardLimit();
+
+      btn.addEventListener("click", () => {
+        expanded = !expanded;
+        applyCardLimit();
+      });
+
+      window.addEventListener("resize", applyCardLimit);
     });
 
 
